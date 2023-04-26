@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <title>MongoDB Real-Time Collection</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MongoDB Change Stream</h1>
+    <table id="change-table">
+        <tr>
+            <th>_id</th>
+            <th>historicalreservationid</th>
+            <th>regioncode</th>
+            <th>park</th>
+            <th>inventorytype</th>
+            <th>tax</th>
+            <th>totalbeforetax</th>
+            <th>discount</th>
+            <th>totalpaid</th>
+            <th>sitetype</th>
+            <th>usetype</th>
+        </tr>
+    </table>
+    <script>
+        var socket = io.connect("http://" + document.domain + ":" + location.port);
+
+        socket.on("change_data", function(data) {
+            var table = $("#change-table");
+            table.empty();
+            table.append("<tr><th>_id</th><th>historicalreservationid</th><th>regioncode</th><th>park</th><th>inventorytype</th><th>tax</th><th>totalbeforetax</th><th>discount</th><th>totalpaid</th><th>sitetype</th><th>usetype</th></tr>");
+
+            for (var i = 0; i < data.length; i++) {
+                table.append("<tr><td>" + data[i]._id + "</td><td>" + data[i].historicalreservationid + "</td><td>" + data[i].regioncode + "</td><td>" + data[i].park + "</td><td>" + data[i].inventorytype + "</td><td>" + data[i].tax + "</td><td>" + data[i].totalbeforetax + "</td><td>" + data[i].discount + "</td><td>" + data[i].totalpaid + "</td><td>" + data[i].sitetype + "</td><td>" + data[i].usetype + "</td></tr>");
+            }
+        });
+    </script>
+</body>
+</html>

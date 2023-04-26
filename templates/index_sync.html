@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+    <title>MongoDB Change Stream</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MongoDB Change Stream</h1>
+    <table id="change-table">
+        <tr>
+            <th>Change Type</th>
+            <th>ID</th>
+            <th>Change Attribute</th>
+            <th>Change Value</th>
+            <th>Change Time</th>
+        </tr>
+    </table>
+    <script>
+        function processChange(change) {
+            var changeType = change.operationType;
+            var id = change.id;
+            var changeTime = change.timestamp;
+
+            var changeAttribute = 'NaN'
+            var changeValue = 'NaN'
+
+            if (changeType === 'update_field' || changeType === 'insert_row') {
+                var fieldList = changeType === 'update_field' ? change.updateDescription.updatedFields : change.fullDocument;
+                for (var attr in fieldList) {
+                    if (fieldList.hasOwnProperty(attr)) {
+                        changeAttribute = attr;
+                        changeValue = fieldList[attr];
+                        addTableRow(changeType, id, changeAttribute, changeValue, changeTime);
+                    }
+                }
+            } else if (changeType === 'delete_field') {
+                changeAttribute = change.updateDescription.removedFields;
+                addTableRow(changeType, id, changeAttribute, changeValue, changeTime);
+            } else if (changeType === 'delete_row') {
+                addTableRow(changeType, id, changeAttribute, changeValue, changeTime);
+            }
+        }
+
+        function addTableRow(changeType, id, changeAttribute, changeValue, changeTime) {
+            var table = $("#change-table");
+            table.append("<tr><td>" + changeType + "</td><td>" + id + "</td><td>" + changeAttribute + "</td><td>" + changeValue + "</td><td>" + changeTime + "</td></tr>");
+        }
+
+        $(document).ready(function() {
+            var socket = io.connect("http://" + document.domain + ":" + location.port);
+            socket.on("change_data", function(data) {
+                processChange(data);
+            });
+        });
+    </script>
+</body>
+</html>
