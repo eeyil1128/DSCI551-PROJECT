@@ -20,29 +20,29 @@ The repo develops a prototype system that emulates the interface of Firebase. Th
 
 ### 4. Run curl command
 #### GET
-curl -X GET "http://localhost:5000/myPath?orderBy=regioncode&equalTo="AK""
+```curl -X GET "http://localhost:5000/myPath?orderBy=regioncode&equalTo="AK""```
 
-curl -X GET "http://localhost:5000/myPath?orderBy=discount&startAt=0&endAt=5&limitToFirst=3"
+```curl -X GET "http://localhost:5000/myPath?orderBy=discount&startAt=0&endAt=5&limitToFirst=3"```
 
 
 #### PUT
-curl -X PUT 'http://localhost:5000/myPath' -H 'Content-Type: application/json' -d '{"regioncode": "CA", "park" : "dsci551"}'
+```curl -X PUT 'http://localhost:5000/myPath' -H 'Content-Type: application/json' -d '{"regioncode": "CA", "park" : "dsci551"}'```
 
-curl -X PUT 'http://localhost:5000/myPath/930b4213-90dd-49ce-a89d-b778813924d9' -H 'Content-Type: application/json' -d '{"regioncode": "NY"}'
+```curl -X PUT 'http://localhost:5000/myPath/930b4213-90dd-49ce-a89d-b778813924d9' -H 'Content-Type: application/json' -d '{"regioncode": "NY"}'```
 
 
 #### POST
-curl -X POST 'http://127.0.0.1:5000/2021Reservation' -d '{"historicalreservationid":"bca72357-5824-4484-9eac-a824f5d00600", "regioncode":"CA"}' -H 'Content-Type: application/json'
+```curl -X POST 'http://127.0.0.1:5000/2021Reservation' -d '{"historicalreservationid":"bca72357-5824-4484-9eac-a824f5d00600", "regioncode":"CA"}' -H 'Content-Type: application/json'```
 
-curl -X POST 'http://127.0.0.1:5000/2021Reservation' -d '{"tax":1,"regioncode":"CA"}' -H 'Content-Type: application/json'
+```curl -X POST 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600' -d '{"discount":0,"inventorytype":"CAMPING"}' -H 'Content-Type: application/json'```
 
 
 #### PATCH
-curl -X PATCH 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600' -d '{"inventorytype":"ACTIVITYPASS","park":"post_park"}' -H 'Content-Type: application/json'
+```curl -X PATCH 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600' -d '{"inventorytype":"ACTIVITYPASS","park":"post_park"}' -H 'Content-Type: application/json'```
 
 
 #### DELETE
-curl -X DELETE 'http://127.0.0.1:5000/2021Reservation/32b0cad7-8443-51e7-a1ea-d50fbb4a0050'
+```curl -X DELETE 'http://127.0.0.1:5000/2021Reservation/32b0cad7-8443-51e7-a1ea-d50fbb4a0050'```
 
-curl -X DELETE 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600/regioncode'
+```curl -X DELETE 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600/regioncode'```
 
