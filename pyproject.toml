@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "Firebase Emulation"
+version = "0.1.0"
+description = "Firebase Emulation"
+authors = ["Mighty Crystal <shuijing@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^2.3.1"
+pymongo = "^4.3.3"
+flask-socketio = "^5.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
