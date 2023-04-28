@@ -32,7 +32,7 @@ The repo develops a prototype system(database server) that emulates Firebase usi
 #### PUT (You can see the PUT command in http://127.0.0.1:10101/)
 ```curl -X PUT 'http://localhost:5000/myPath' -H 'Content-Type: application/json' -d '{"regioncode": "CA", "park" : "dsci551"}'```
 
-```curl -X PUT 'http://localhost:5000/myPath/930b4213-90dd-49ce-a89d-b778813924d9' -H 'Content-Type: application/json' -d '{"regioncode": "NY"}'```
+```curl -X PUT 'http://localhost:5000/myPath/66be58c0-6d1f-4923-8735-879efcbb0c03' -H 'Content-Type: application/json' -d '{"regioncode": "NY"}'```
 
 
 #### POST (You can see the POST command in http://127.0.0.1:10101/)
