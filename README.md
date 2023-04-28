@@ -34,6 +34,8 @@ The repo develops a prototype system(database server) that emulates Firebase usi
 
 ```curl -X PUT 'http://localhost:5000/myPath/66be58c0-6d1f-4923-8735-879efcbb0c03' -H 'Content-Type: application/json' -d '{"regioncode": "NY"}'```
 
+```curl -X POST 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600/discount' -d '"10"' -H 'Content-Type: application/json'```     
+
 
 #### POST (You can see the POST command in http://127.0.0.1:10101/)
 ```curl -X POST 'http://127.0.0.1:5000/2021Reservation' -d '{"historicalreservationid":"bca72357-5824-4484-9eac-a824f5d00600", "regioncode":"CA"}' -H 'Content-Type: application/json'```
