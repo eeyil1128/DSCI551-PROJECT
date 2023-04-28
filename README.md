@@ -47,7 +47,7 @@ The repo develops a prototype system(database server) that emulates Firebase usi
 
 
 #### DELETE (You can see the DELETE command in http://127.0.0.1:10101/)
-```curl -X DELETE 'http://127.0.0.1:5000/2021Reservation/32b0cad7-8443-51e7-a1ea-d50fbb4a0050'```
+```curl -X DELETE 'http://127.0.0.1:5000/2021Reservation/ee52899b-7651-5703-91bd-382332618f0e'```
 
 ```curl -X DELETE 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600/regioncode'```
 
