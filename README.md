@@ -1,13 +1,13 @@
 # DSCI551-PROJECT: Emulating Firebase
 
-The repo develops a prototype system that emulates the interface of Firebase. The data this repo used is 2021 US Camground reservation data stored in MongoDB. This repo will allow user to use curl command to access the MongoDB data and see the real-time data stream change in the web app.
+The repo develops a prototype system(database server) that emulates Firebase using Flask, WebSockets and MongoDB. The data this repo used is 2021 US Campground reservation data stored in MongoDB. This repo will allow users to use curl command to access the MongoDB data and see the real-time data stream change in the web app.
 
 ## Get Started
 ### 1. Start the poetry virtual environment
 ```poetry shell```
 
 
-### 2. Run the restful server in the background
+### 2. Run the RESTful server in the background
 
 ```python3 restful_server.py```
 
