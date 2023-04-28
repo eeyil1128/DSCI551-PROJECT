@@ -1,8 +1,8 @@
 import json
-from bson.json_util import dumps
-from flask import Flask, render_template
-from flask_socketio import SocketIO
 from pymongo import MongoClient
+from bson.json_util import dumps
+from flask_socketio import SocketIO
+from flask import Flask, render_template
 
 app = Flask(__name__)
 socketio = SocketIO(app)

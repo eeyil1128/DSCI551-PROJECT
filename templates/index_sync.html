@@ -57,15 +57,21 @@ from here is the real content of the table.
         it will be easier to parse in java script 
     -->
     <script>
+        //function to process in-coming data
         function processChange(change) {
+            //define variable before hand, so it won't be global variable
             var changeType = change.operationType;
             var id = change.id;
             var changeTime = change.timestamp;
 
+            // pre-define changeAttribute and changeValue to NaN
             var changeAttribute = 'NaN'
             var changeValue = 'NaN'
 
+
             if (changeType === 'update_field' || changeType === 'insert_row') {
+                // if changeType == 'update_field', fieldList = change.updateDescription.updatedFields
+                // if changeType == 'insert_row'', fieldList = change.fullDocument
                 var fieldList = changeType === 'update_field' ? change.updateDescription.updatedFields : change.fullDocument;
                 for (var attr in fieldList) {
                     if (fieldList.hasOwnProperty(attr)) {
@@ -82,6 +88,7 @@ from here is the real content of the table.
             }
         }
 
+        // function to append row to html
         function addTableRow(changeType, id, changeAttribute, changeValue, changeTime) {
             var table = $("#change-table");
             table.append("<tr><td>" + changeType + "</td><td>" + id + "</td><td>" + changeAttribute + "</td><td>" + changeValue + "</td><td>" + changeTime + "</td></tr>");

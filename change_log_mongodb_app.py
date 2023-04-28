@@ -1,8 +1,8 @@
 import json
-from bson.json_util import dumps
-from flask import Flask, render_template
-from flask_socketio import SocketIO
 from pymongo import MongoClient
+from bson.json_util import dumps
+from flask_socketio import SocketIO
+from flask import Flask, render_template
 from pymongo.errors import ServerSelectionTimeoutError
 
 app = Flask(__name__)
@@ -16,6 +16,7 @@ collection = db['2021Reservation']
 @app.route('/')
 def index():
     return render_template("index_sync.html")
+#--index
 
 # modify the mongodb data here, so when pass it to html java script, it will be easier to parse.
 def modify_change(change):
@@ -52,19 +53,23 @@ def watch_changes():
         with collection.watch() as stream:
             while stream.alive:
                 change = stream.try_next()
+                # if change is None, the modified change won't submit to web
                 if change is not None:
                     change = modify_change(change)
+                    # need to pass json format data to html
                     socketio.emit("change_data", json.loads(dumps(change)))
     except ServerSelectionTimeoutError:
         print("MongoDB connection timeout. Check the connection settings.")
         return
+#--watch_changes
 
+#make the connection
 @socketio.on("connect")
 def on_connect():
     if not hasattr(on_connect, "_watcher_started") or not on_connect._watcher_started:
         on_connect._watcher_started = True
-        socketio.start_background_task(watch_changes)
-
+        socketio.start_background_task(watch_changes) #run the watch_changes in the background
+#--on_connect
 
 if __name__ == '__main__':
-    socketio.run(app, host='127.0.0.1', port=10101, debug=True)
+    socketio.run(app, host='127.0.0.1', port=10101, debug=True) #run the web app at port 10101
