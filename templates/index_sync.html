@@ -2,26 +2,47 @@
 <html>
 <head>
     <title>MongoDB Change Stream</title>
+    <!--
+    src attribute specifies the URL of an external script file. 
+    so it will save some time for Java script
+    -->
+
+    <!--
+    import cloudfare socket libaray
+    -->    
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+
+    <!--
+    import jQuery libaray to define function
+    -->    
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 
+    please not that padding cannot be change, or the final html will be really weird.
+    broder size 1px - 3px
+    future work: adjust the table size based on the data size
+    -->  
     <style>
         table {
             width: 100%;
             border-collapse: collapse;
         }
-
+        th, td {
+            padding: 10px;
+        }
         table, th, td {
             border: 1px solid black;
             text-align: center;
         }
-
-        th, td {
-            padding: 10px;
-        }
     </style>
 </head>
+<!-- 
+from here is the real content of the table.
+-->
 <body>
     <h1>MongoDB Change Stream</h1>
+    <!--
+    Here in the change table, I write out the column/attribute name. Downside is if the new column/attribute is added, it won't show in the html. If you want to capture the new added column/attribute. You can also loop through the data and grab the data attribute.
+    -->    
     <table id="change-table">
         <tr>
             <th>Change Type</th>
@@ -31,6 +52,10 @@
             <th>Change Time</th>
         </tr>
     </table>
+    <!--
+        define function processChange. pass in data change is already being cleaned in python,
+        it will be easier to parse in java script 
+    -->
     <script>
         function processChange(change) {
             var changeType = change.operationType;
