@@ -8,7 +8,7 @@ from pymongo.errors import ServerSelectionTimeoutError
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-# Configure MongoDB client
+# connect to MongoDB
 client = MongoClient("mongodb+srv://shuijing1996:Zshui1996!@dsci551.dgblqjz.mongodb.net/?retryWrites=true&w=majority")
 db = client.dsci551
 collection = db['2021Reservation']
@@ -17,14 +17,15 @@ collection = db['2021Reservation']
 def index():
     return render_template("index_sync.html")
 
+# modify the mongodb data here, so when pass it to html java script, it will be easier to parse.
 def modify_change(change):
-    # extract _id
+    # extract _id. change _id from ObjectID to string
     change['id'] = str(change['documentKey']['_id'])
 
-    # extract time
+    # extract time. change time to string type
     change['timestamp'] = str(change['wallTime'])
 
-    # make operationType more granular
+    # redefine the operationType to ['delete_field', 'update_field', 'delete_row', 'insert_row']
     if change['operationType'] == 'update':
         if change['updateDescription']['updatedFields'] == {}:
             change['operationType'] = 'delete_field'
@@ -43,8 +44,9 @@ def modify_change(change):
         pass
 
     return change
+#--modify_change
 
-
+# listen for change in MongoDB data, if a change is detected, grab the newest collection and send to html
 def watch_changes():
     try:
         with collection.watch() as stream:

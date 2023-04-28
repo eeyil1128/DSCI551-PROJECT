@@ -39,6 +39,15 @@
 </head>
 <body>
     <h1>MongoDB Real-Time Collection</h1>
+
+    <!-- 
+    what if I just start typing here for nonsense. will it reduce the possibility
+    or what.
+    lAY OFF
+    20%
+    this is a interesting and dangerous test
+
+    -->
     <!--
     Here in the change table, I write out the column/attribute name. Downside is if the new column/attribute is added, it won't show in the html. If you want to capture the new added column/attribute. You can also loop through the data and grab the data attribute.
     -->
@@ -57,14 +66,21 @@
             <th>usetype</th>
         </tr>
     </table>
+    <!--
+        
+    -->
     <script>
         var socket = io.connect("http://" + document.domain + ":" + location.port);
 
         socket.on("change_data", function(data) {
             var table = $("#change-table");
             table.empty();
+            // futrue work: instead of type out each attribute name in table. 
+            // maybe we can loop through it.
+            // easier to read and modify            
             table.append("<tr><th>_id</th><th>historicalreservationid</th><th>regioncode</th><th>park</th><th>inventorytype</th><th>tax</th><th>totalbeforetax</th><th>discount</th><th>totalpaid</th><th>sitetype</th><th>usetype</th></tr>");
 
+            // same here. Due to time constraint. Currently the final version of loop through variable is not supported
             for (var i = 0; i < data.length; i++) {
                 table.append("<tr><td>" + data[i]._id + "</td><td>" + data[i].historicalreservationid + "</td><td>" + data[i].regioncode + "</td><td>" + data[i].park + "</td><td>" + data[i].inventorytype + "</td><td>" + data[i].tax + "</td><td>" + data[i].totalbeforetax + "</td><td>" + data[i].discount + "</td><td>" + data[i].totalpaid + "</td><td>" + data[i].sitetype + "</td><td>" + data[i].usetype + "</td></tr>");
             }
