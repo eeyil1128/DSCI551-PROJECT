@@ -32,9 +32,7 @@ The repo develops a prototype system(database server) that emulates Firebase usi
 #### PUT (You can see the PUT command in http://127.0.0.1:10101/)
 ```curl -X PUT 'http://localhost:5000/myPath' -H 'Content-Type: application/json' -d '{"regioncode": "CA", "park" : "dsci551"}'```
 
-```curl -X PUT 'http://localhost:5000/myPath/66be58c0-6d1f-4923-8735-879efcbb0c03' -H 'Content-Type: application/json' -d '{"regioncode": "NY"}'```
-
-```curl -X POST 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600/discount' -d '"10"' -H 'Content-Type: application/json'```     
+```curl -X PUT 'http://localhost:5000/myPath/66be58c0-6d1f-4923-8735-879efcbb0c03' -H 'Content-Type: application/json' -d '{"regioncode": "NY"}'```    
 
 
 #### POST (You can see the POST command in http://127.0.0.1:10101/)
@@ -42,6 +40,7 @@ The repo develops a prototype system(database server) that emulates Firebase usi
 
 ```curl -X POST 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600' -d '{"discount":0,"inventorytype":"CAMPING"}' -H 'Content-Type: application/json'```
 
+```curl -X POST 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600/discount' -d '"10"' -H 'Content-Type: application/json'``` 
 
 #### PATCH (You can see the PATCH command in http://127.0.0.1:10101/)
 ```curl -X PATCH 'http://127.0.0.1:5000/2021Reservation/bca72357-5824-4484-9eac-a824f5d00600' -d '{"inventorytype":"ACTIVITYPASS","park":"post_park"}' -H 'Content-Type: application/json'```
