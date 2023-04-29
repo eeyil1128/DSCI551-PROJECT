@@ -33,7 +33,7 @@ def get_reservations(myPath):
             raise ValueError ('Please specify an attribute.')
 
         #create proper index to support orderby
-        collection.create_index([(field, pymongo.ASCENDING)])
+        #collection.create_index([(field, pymongo.ASCENDING)])
         
         equal_to = request.args.get('equalTo')
         start_at = request.args.get('startAt')
@@ -56,7 +56,7 @@ def get_reservations(myPath):
         elif end_at is not None:
             query[field]={"$lte":end_at}
         
-        print(query)
+        #print(query)
         if 'limitToFirst' in request.args:
             limit_first = request.args.get('limitToFirst')
             results = collection.find(query).sort([(field,pymongo.ASCENDING)]).limit(int(limit_first))
